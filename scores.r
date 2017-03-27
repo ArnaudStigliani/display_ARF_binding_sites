@@ -53,10 +53,10 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
     scores_ARF5_rev<- mapply(seq_pos,FUN=PWMscoreStartingAt,starting.at=sapply(FUN=start,match_ARF5_rev[]),SIMPLIFY=FALSE,MoreArgs=list(pwm=PWM_rev))
 
 
-    promoter <- "pDOF58"
+    promoter <- "pLFY"
 
-    sites <- start(match_ARF5$pDOF58)
-    sites_rev<- start(match_ARF5_rev$pDOF58)
+    sites <- start(match_ARF5$pLFY)
+    sites_rev<- start(match_ARF5_rev$pLFY)
 
     DR <- NULL
     i <- 0
@@ -69,7 +69,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                DR <- rbind(DR,c((elt2 - elt1), sites[i],scores_ARF5$pDOF58[i],scores_ARF5$pDOF58[j]))
+                DR <- rbind(DR,c((elt2 - elt1), sites[i],scores_ARF5$pLFY[i],scores_ARF5$pLFY[j]))
             }
         }
     }
@@ -87,7 +87,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                DR_rev <- rbind(DR_rev,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pDOF58[i],scores_ARF5_rev$pDOF58[j]))
+                DR_rev <- rbind(DR_rev,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pLFY[i],scores_ARF5_rev$pLFY[j]))
             }
         }
     }
@@ -106,7 +106,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                ER <- rbind(ER,c((elt2 - elt1), sites[i],scores_ARF5$pDOF58[i],scores_ARF5_rev$pDOF58[j]))
+                ER <- rbind(ER,c((elt2 - elt1), sites[i],scores_ARF5$pLFY[i],scores_ARF5_rev$pLFY[j]))
             }
         }
     }
@@ -125,7 +125,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                IR <- rbind(IR,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pDOF58[i],scores_ARF5$pDOF58[j]))
+                IR <- rbind(IR,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pLFY[i],scores_ARF5$pLFY[j]))
             }
         }
     }
@@ -136,5 +136,5 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
     tab[,1] <- tab[,1] - 6 
     tab[,2] <- tab[,2] + 3 
     tab <- tab[tab[,1]> 0 , ]
-    write.table(round(tab,5),paste("Interdistances_",ARF[k],"_DOF58",".csv",sep=""),col.names=NA,quote=FALSE,sep="\t")
+    write.table(round(tab,5),paste("Interdistances_",ARF[k],"_LFY",".csv",sep=""),col.names=NA,quote=FALSE,sep="\t")
 }

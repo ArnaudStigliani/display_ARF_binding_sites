@@ -40,7 +40,7 @@ scores_ARF5_rev_pos <- mapply(seq_pos,FUN=PWMscoreStartingAt,SIMPLIFY=FALSE,  st
 #initialise
 
 scores_DR_pos <- NULL
-scores_DR_pos_rev <-  NULL
+scores_DR_pos_rev <- NULL
 scores_ER_pos <- NULL
 scores_IR_pos <- NULL
 
@@ -57,7 +57,7 @@ for(i in 1:length(ARF5_pos))
     }
 }
 
-DR <- lapply(FUN=which,lapply(FUN= ">",unlist(scores_DR_pos,recursive=FALSE),-14))
+DR <- lapply(FUN=which,lapply(FUN= ">",unlist(scores_DR_pos,recursive=FALSE),-20))
 
 
 # Compute DR rev
