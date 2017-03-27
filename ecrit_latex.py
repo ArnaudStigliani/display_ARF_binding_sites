@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
-col_tab='p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}'
-width=len(col_tab)/6
+col_tab='p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}'
+width=len(col_tab)/6 -1
 #print(width)
 
 
@@ -63,11 +63,11 @@ while (i < len(couleur)):
         couleur[i] += 2
     i+=1
 
+print
 
-
-init_tex='\\documentclass[10pt]{article}\n\usepackage[utf8]{inputenc}\n\usepackage{longtable}\n\usepackage{colortbl}\n\usepackage[margin=2cm]{geometry}\n\\begin{document}\n'
+init_tex='\\documentclass[10pt]{article}\n\usepackage[utf8]{inputenc}\n\usepackage{longtable}\n\usepackage[table]{xcolor}\n\usepackage[margin=2cm]{geometry}\n\\begin{document}\n'
 init_tab='\\begin{longtable}{'+col_tab+'}\n'
-end_tab='\\end{longtable}\n'
+end_tab='\n\\end{longtable}\n'
 end_tex='\\end{document}\n'
 #print(init_tab)
 
@@ -77,14 +77,21 @@ j=0
 texte = str()
 texte2 = str()
 while( i < len(seq)):
-    texte = texte + seq[i]
+    if (couleur[i]==0):
+        texte = texte + seq[i]
+    elif (couleur[i]==1):
+        texte = texte + '\\centering \\cellcolor{yellow!25}' + seq[i]
+    elif (couleur[i]==2):
+        texte = texte + '\\centering \\cellcolor{blue!25}' + seq[i]
+    elif (couleur[i]==3):
+        texte = texte + '\\centering \\cellcolor{green!25}' + seq[i]
     texte2 = texte2 + '.' 
     i = i+1
     j = j+1
-    if(j == width):
+    if(j == width or i == (len(seq) -1)):
         j=0
-        texte = texte + ' \\\\\n'
-        texte = texte + texte2 + ' \\\\\n'
+        texte = texte + ' & \\\\\n'
+        texte = texte + texte2 + ' & \\\\\n'
         texte2 = str()
     else :
         texte = texte + ' & '
