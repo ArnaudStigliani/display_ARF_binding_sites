@@ -74,30 +74,30 @@ end_tex='\\end{document}\n'
 
 
 
-# i=0
-# j=0
-# texte = str()
-# texte2 = str()
-# while( i < len(seq)):
-#     if (couleur[i]==0):
-#         texte = texte + seq[i]
-#     elif (couleur[i]==1):
-#         texte = texte + '\\centering \\cellcolor{yellow!25}' + seq[i]
-#     elif (couleur[i]==2):
-#         texte = texte + '\\centering \\cellcolor{blue!25}' + seq[i]
-#     elif (couleur[i]==3):
-#         texte = texte + '\\centering \\cellcolor{green!25}' + seq[i]
-#     texte2 = texte2 + '.' 
-#     i = i+1
-#     j = j+1
-#     if(j == width or i == (len(seq) -1)):
-#         j=0
-#         texte = texte + ' & \\\\\n'
-#         #texte = texte + texte2 + ' & \\\\\n'
-#         texte2 = str()
-#     else :
-#         texte = texte + ' & '
-#         texte2 = texte2 + ' & '
+i=0
+j=0
+texte = str()
+texte2 = str()
+while( i < len(seq)):
+    if (couleur[i]==0):
+        texte = texte + seq[i]
+    elif (couleur[i]==1):
+        texte = texte + '\\centering \\cellcolor{yellow!25}' + seq[i]
+    elif (couleur[i]==2):
+        texte = texte + '\\centering \\cellcolor{blue!25}' + seq[i]
+    elif (couleur[i]==3):
+        texte = texte + '\\centering \\cellcolor{green!25}' + seq[i]
+    texte2 = texte2 + '.' 
+    i = i+1
+    j = j+1
+    if(j == width or i == (len(seq) -1)):
+        j=0
+        texte = texte + ' & \\\\\n'
+        #texte = texte + texte2 + ' & \\\\\n'
+        texte2 = str()
+    else :
+        texte = texte + ' & '
+        texte2 = texte2 + ' & '
 
 
 # i=len(list_sites)-1

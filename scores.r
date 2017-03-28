@@ -52,11 +52,11 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
     match_ARF5_rev<- sapply(FUN=matchPWM,seq_pos,pwm=PWM_rev,min.score=-12)
     scores_ARF5_rev<- mapply(seq_pos,FUN=PWMscoreStartingAt,starting.at=sapply(FUN=start,match_ARF5_rev[]),SIMPLIFY=FALSE,MoreArgs=list(pwm=PWM_rev))
 
-    sequence <- as.character(ARF5_pos$pDOF34)
-    promoter <- "pDOF34"
+    sequence <- as.character(ARF5_pos$pDOF58)
+    promoter <- "pDOF58"
 
-    sites <- start(match_ARF5$pDOF34)
-    sites_rev<- start(match_ARF5_rev$pDOF34)
+    sites <- start(match_ARF5$pDOF58)
+    sites_rev<- start(match_ARF5_rev$pDOF58)
 
     DR <- NULL
     i <- 0
@@ -69,7 +69,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                DR <- rbind(DR,c((elt2 - elt1), sites[i],scores_ARF5$pDOF34[i],scores_ARF5$pDOF34[j],str_sub(sequence,sites[i], sites[i] + 6 + (elt2 - elt1))))
+                DR <- rbind(DR,c((elt2 - elt1), sites[i],scores_ARF5$pDOF58[i],scores_ARF5$pDOF58[j],str_sub(sequence,sites[i] +3, sites[i] +3 + 6 + (elt2 - elt1) -1)))
             }
         }
     }
@@ -87,7 +87,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                DR_rev <- rbind(DR_rev,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pDOF34[i],scores_ARF5_rev$pDOF34[j],str_sub(sequence,sites_rev[i], sites_rev[i] + 6 + (elt2 - elt1))))
+                DR_rev <- rbind(DR_rev,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pDOF58[i],scores_ARF5_rev$pDOF58[j],str_sub(sequence,sites_rev[i] +3, sites_rev[i] +3 + 6 + (elt2 - elt1) -1)))
             }
         }
     }
@@ -106,7 +106,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                ER <- rbind(ER,c((elt2 - elt1), sites[i],scores_ARF5$pDOF34[i],scores_ARF5_rev$pDOF34[j],str_sub(sequence,sites[i], sites[i] + 6 + (elt2 - elt1))))
+                ER <- rbind(ER,c((elt2 - elt1), sites[i],scores_ARF5$pDOF58[i],scores_ARF5_rev$pDOF58[j],str_sub(sequence,sites[i] +3, sites[i] +3 + 6 + (elt2 - elt1) -1)))
             }
         }
     }
@@ -125,7 +125,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
             j <- j+1  
             if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
             {
-                IR <- rbind(IR,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pDOF34[i],scores_ARF5$pDOF34[j],str_sub(sequence,sites_rev[i], sites_rev[i] + 6 + (elt2 - elt1))))
+                IR <- rbind(IR,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev$pDOF58[i],scores_ARF5$pDOF58[j],str_sub(sequence,sites_rev[i] +3, sites_rev[i] +3 + 6 + (elt2 - elt1) -1)))
             }
         }
     }
@@ -138,6 +138,6 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
     tab <- tab[as.integer(tab[,1])> 0 , ]
     tab[,3] <- round(as.integer(tab[,3]))
     tab[,4] <- round(as.integer(tab[,4]))
-    write.table(tab,paste("Interdistances_",ARF[k],"_LFY",".csv",sep=""),col.names=NA,quote=FALSE,sep="\t")
+    write.table(tab,paste("Interdistances_",ARF[k],"_DOF58",".csv",sep=""),col.names=NA,quote=FALSE,sep="\t")
 }
 
