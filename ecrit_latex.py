@@ -72,6 +72,8 @@ end_tex='\\end{document}\n'
 #print(init_tab)
 
 
+
+
 # i=0
 # j=0
 # texte = str()
