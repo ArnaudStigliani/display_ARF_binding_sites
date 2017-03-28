@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+import os
 
 col_tab='p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}p{0cm}'
 width=len(col_tab)/6 -1
@@ -29,23 +30,24 @@ while (i<len(seq)):
     i=i+1
 
 orientation2 = list (orientation)
+orientation3 = list (orientation)
 
 
 for elt in list_sites:
     i=0
-    while(i < 6):
-        if elt[0] == 'DR':
+    while(i < int(elt[1])+ 12 ):
+        if elt[0] == 'DR' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
             orientation[int(elt[2])-1 + i] =  True
-            orientation[int(elt[2]) + int(elt[1]) + i -1] =  True
-        if elt[0] == 'DR rev':
-            orientation2[int(elt[2])-1 + i] =  True
-            orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
-        if elt[0] == 'ER':
+#            orientation[int(elt[2]) + int(elt[1]) + i -1] =  True
+        if elt[0] == 'DR rev' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
             orientation[int(elt[2])-1 + i] =  True
-            orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
-        if elt[0] == 'IR':
+#           orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
+        if elt[0] == 'ER' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
             orientation2[int(elt[2])-1 + i] =  True
-            orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
+#          orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
+        if elt[0] == 'IR' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
+            orientation3[int(elt[2])-1 + i] =  True
+#         orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
         i = i+1
         
 couleur=list()
@@ -79,14 +81,14 @@ j=0
 texte = str()
 texte2 = str()
 while( i < len(seq)):
-    if (couleur[i]==0):
-        texte = texte + seq[i]
-    elif (couleur[i]==1):
-        texte = texte + '\\centering \\cellcolor{yellow!25}' + seq[i]
-    elif (couleur[i]==2):
+    if (orientation[i]):
+        texte = texte + '\\centering \\cellcolor{pink}' + seq[i]
+    elif (orientation2[i]):
         texte = texte + '\\centering \\cellcolor{blue!25}' + seq[i]
-    elif (couleur[i]==3):
+    elif (orientation3[i]):
         texte = texte + '\\centering \\cellcolor{green!25}' + seq[i]
+    else :
+        texte = texte + seq[i]
     texte2 = texte2 + '.' 
     i = i+1
     j = j+1
@@ -127,3 +129,5 @@ with open('pDOF16.tex','w') as f1:
     f1.write(texte)
     f1.write(end_tab)
     f1.write(end_tex)
+
+os.system('pdflatex pDOF16.tex')
