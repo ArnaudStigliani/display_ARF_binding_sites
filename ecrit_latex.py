@@ -15,7 +15,7 @@ with open('promoters_dofs.fasta','r') as f1:
 
 seq=list_lines[1]
 
-with open('Interdistances_ARF5_pDOF34.csv','r') as f1:
+with open('Interdistances_ARF5_pDOF58.csv','r') as f1:
     list_sites=list()
     for n,site in enumerate(f1):
         site=site.strip("\n")
@@ -26,7 +26,7 @@ with open('Interdistances_ARF5_pDOF34.csv','r') as f1:
 orientation=list()
 i=0
 while (i<len(seq)):
-    orientation.append(False)
+    orientation.append(0)
     i=i+1
 
 orientation2 = list (orientation)
@@ -38,16 +38,16 @@ for elt in list_sites:
     i=0
     while(i < int(elt[1])+ 12 ):
         if elt[0] == 'DR' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
-            orientation[int(elt[2])-1 + i] =  True
+            orientation[int(elt[2])-1 + i] +=1
 #            orientation[int(elt[2]) + int(elt[1]) + i -1] =  True
         if elt[0] == 'DR rev' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
-            orientation4[int(elt[2])-1 + i] =  True
+            orientation4[int(elt[2])-1 + i]   +=1
 #           orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
         if elt[0] == 'ER' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
-            orientation2[int(elt[2])-1 + i] =  True
+            orientation2[int(elt[2])-1 + i]   +=1
 #          orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
         if elt[0] == 'IR' and int(elt[3]) >= -9 and int(elt[4]) >= -9 :
-            orientation3[int(elt[2])-1 + i] =  True
+            orientation3[int(elt[2])-1 + i]   +=1
 #         orientation2[int(elt[2]) + int(elt[1]) + i -1] =  True
         i = i+1
         
@@ -61,15 +61,20 @@ while (i<len(seq)):
 i=0
 while (i < len(couleur)):
     if(orientation[i]):
-        couleur[i] += 1
+        couleur[i] += orientation[i]
     if(orientation2[i]):
-        couleur[i] += 2
+        couleur[i] += orientation2[i]
+    if(orientation3[i]):
+        couleur[i] += orientation3[i]
+    if(orientation4[i]):
+        couleur[i] += orientation4[i]
     i+=1
+    
 
 
 
 init_tex='\\documentclass[10pt]{article}\n\usepackage[utf8]{inputenc}\n\usepackage{longtable}\n\usepackage[table]{xcolor}\n\usepackage[margin=2cm]{geometry}\n\\begin{document}\n'
-legend='\\section*{pDOF34}\n\n\\begin{tabular}{|c|p{2cm}|}\n\hline\nDR &  \\cellcolor{pink}\\\\\n\\hline\nDR rev &  \\cellcolor{purple!30}\\\\\n\\hline\\\nER &  \\cellcolor{blue!25}\\\\\n\\hline\nIR &  \\cellcolor{green!30}\\\\\n\\hline\nSuperimposed &  \\cellcolor{red}\\\\\n\\hline\end{tabular}'
+legend='\\section*{pDOF58}\n\n\\begin{tabular}{|c|p{2cm}|}\n\hline\nDR &  \\cellcolor{pink}\\\\\n\\hline\nDR rev &  \\cellcolor{purple!30}\\\\\n\\hline\\\nER &  \\cellcolor{blue!25}\\\\\n\\hline\nIR &  \\cellcolor{green!30}\\\\\n\\hline\nSuperimposed &  \\cellcolor{red}\\\\\n\\hline\end{tabular}'
 init_tab='\\begin{longtable}{'+col_tab+'}\n'
 end_tab='\n\\end{longtable}\n'
 end_tex='\\end{document}\n'
@@ -83,24 +88,16 @@ j=0
 texte = str()
 texte2 = str()
 while( i < len(seq)):
-    check=False
-    if (orientation[i]):
+    if couleur[i] > 1 :
+        texte = texte + '\\cellcolor{red}' 
+    elif (orientation[i] != 0 ):
         texte = texte + '\\cellcolor{pink}' 
-        check=True
-    if (orientation2[i]):
+    elif (orientation2[i] != 0 ):
         texte = texte + '\\cellcolor{blue!25}' 
-        if check:
-            texte = texte + '\\cellcolor{red}' 
-        check=True
-    if (orientation3[i]):
+    elif (orientation3[i] != 0 ):
         texte = texte + '\\cellcolor{green!25}' 
-        if check:
-            texte = texte + '\\cellcolor{red}' 
-        check=True
-    if (orientation4[i]):
+    elif (orientation4[i] != 0 ):
         texte = texte + '\\cellcolor{purple!30}' 
-        if check:
-            texte = texte + '\\cellcolor{red}' 
     texte = texte + seq[i]
     texte2 = texte2 + '.' 
     i = i+1
@@ -136,7 +133,7 @@ while( i < len(seq)):
 
     
 
-with open('pDOF34.tex','w') as f1:
+with open('pDOF58.tex','w') as f1:
     f1.write(init_tex)
     f1.write(legend)
     f1.write(init_tab)
@@ -144,4 +141,4 @@ with open('pDOF34.tex','w') as f1:
     f1.write(end_tab)
     f1.write(end_tex)
 
-os.system('pdflatex pDOF34.tex')
+os.system('pdflatex pDOF58.tex')
