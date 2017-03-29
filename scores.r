@@ -46,10 +46,10 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
     PWM_rev <- reverseComplement(PWM)
     k <- k + 1
     ARF <- list("ARF5","ARF2")
-    match_ARF5 <- sapply(FUN=matchPWM,seq_pos,pwm=PWM,min.score=-15)
+    match_ARF5 <- sapply(FUN=matchPWM,seq_pos,pwm=PWM,min.score=-12)
     scores_ARF5 <- mapply(seq_pos,FUN=PWMscoreStartingAt,starting.at=sapply(FUN=start,match_ARF5[]),SIMPLIFY=FALSE,MoreArgs=list(pwm=PWM))
     
-    match_ARF5_rev<- sapply(FUN=matchPWM,seq_pos,pwm=PWM_rev,min.score=-15)
+    match_ARF5_rev<- sapply(FUN=matchPWM,seq_pos,pwm=PWM_rev,min.score=-12)
     scores_ARF5_rev<- mapply(seq_pos,FUN=PWMscoreStartingAt,starting.at=sapply(FUN=start,match_ARF5_rev[]),SIMPLIFY=FALSE,MoreArgs=list(pwm=PWM_rev))
 
     sequence <- as.character(ARF5_pos$pDOF58)
@@ -149,6 +149,7 @@ for (PWM in list(pwm_ARF5,pwm_ARF2))
         tab <- tab[as.integer(tab[,1])> 0 , ]
         tab[,3] <- round(as.integer(tab[,3]))
         tab[,4] <- round(as.integer(tab[,4]))
+        tab <- tab[order(tab[,2]),]
         write.table(tab,paste("Interdistances_",ARF[k],"_DOF58",".csv",sep=""),col.names=NA,quote=FALSE,sep="\t")
     }
 }

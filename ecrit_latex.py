@@ -13,9 +13,9 @@ with open('promoters_dofs.fasta','r') as f1:
         list_lines.append(line)
         #print(list_lines[0])
 
-seq=list_lines[5]
+seq=list_lines[3]
 
-with open('Interdistances_ARF5_pDOF58.csv','r') as f1:
+with open('Interdistances_ARF5_DOF34.csv','r') as f1:
     list_sites=list()
     for n,site in enumerate(f1):
         site=site.strip("\n")
@@ -74,7 +74,7 @@ while (i < len(couleur)):
 
 
 init_tex='\\documentclass[10pt]{article}\n\usepackage[utf8]{inputenc}\n\usepackage{longtable}\n\usepackage[table]{xcolor}\n\usepackage[margin=2cm]{geometry}\n\\begin{document}\n'
-legend='\\section*{pDOF58}\n\n\\begin{tabular}{|c|p{2cm}|}\n\hline\nDR &  \\cellcolor{pink}\\\\\n\\hline\nDR rev &  \\cellcolor{purple!30}\\\\\n\\hline\\\nER &  \\cellcolor{blue!25}\\\\\n\\hline\nIR &  \\cellcolor{green!30}\\\\\n\\hline\nSuperimposed &  \\cellcolor{red}\\\\\n\\hline\end{tabular}'
+legend='\\section*{pDOF34}\n\n\\begin{tabular}{|c|p{2cm}|}\n\hline\nDR &  \\cellcolor{pink}\\\\\n\\hline\nDR rev &  \\cellcolor{purple!30}\\\\\n\\hline\\\nER &  \\cellcolor{blue!25}\\\\\n\\hline\nIR &  \\cellcolor{green!30}\\\\\n\\hline\nSuperimposed &  \\cellcolor{red}\\\\\n\\hline\end{tabular}'
 init_tab='\\begin{longtable}{'+col_tab+'}\n'
 end_tab='\n\\end{longtable}\n'
 end_tex='\\end{document}\n'
@@ -133,7 +133,7 @@ while( i < len(seq)):
 
     
 
-with open('pDOF58.tex','w') as f1:
+with open('pDOF34.tex','w') as f1:
     f1.write(init_tex)
     f1.write(legend)
     f1.write(init_tab)
@@ -141,4 +141,4 @@ with open('pDOF58.tex','w') as f1:
     f1.write(end_tab)
     f1.write(end_tex)
 
-os.system('pdflatex pDOF58.tex')
+os.system('pdflatex pDOF34.tex')
