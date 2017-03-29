@@ -13,7 +13,7 @@ with open('promoters_dofs.fasta','r') as f1:
         list_lines.append(line)
         #print(list_lines[0])
 
-seq=list_lines[1]
+seq=list_lines[5]
 
 with open('Interdistances_ARF5_pDOF58.csv','r') as f1:
     list_sites=list()
