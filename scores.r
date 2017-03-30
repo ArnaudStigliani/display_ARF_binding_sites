@@ -44,6 +44,15 @@ seq_pos <- as.character(ARF5_pos)
 tab_ARF2 <- NULL
 tab_ARF5 <-  NULL
 k <- 0
+if(len(args == 3))
+{
+    threshold <- args[3]
+}
+else
+{
+    threshold <- -12
+}
+
 while(k < length(seq_pos))
 {
     k <- k+1
