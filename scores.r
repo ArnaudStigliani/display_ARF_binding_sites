@@ -44,14 +44,8 @@ seq_pos <- as.character(ARF5_pos)
 tab_ARF2 <- NULL
 tab_ARF5 <-  NULL
 k <- 0
-if(len(args == 3))
-{
-    threshold <- args[3]
-}
-else
-{
-    threshold <- -12
-}
+threshold <- -12
+
 
 while(k < length(seq_pos))
 {
@@ -62,10 +56,10 @@ while(k < length(seq_pos))
         p <- p+1
         PWM_rev <- reverseComplement(PWM)
         ARF <- list("ARF5","ARF2")
-        match_ARF5 <- sapply(FUN=matchPWM,seq_pos,pwm=PWM,min.score=-12)
+        match_ARF5 <- sapply(FUN=matchPWM,seq_pos,pwm=PWM,min.score=threshold)
         scores_ARF5 <- mapply(seq_pos,FUN=PWMscoreStartingAt,starting.at=sapply(FUN=start,match_ARF5[]),SIMPLIFY=FALSE,MoreArgs=list(pwm=PWM))
         
-        match_ARF5_rev<- sapply(FUN=matchPWM,seq_pos,pwm=PWM_rev,min.score=-12)
+        match_ARF5_rev<- sapply(FUN=matchPWM,seq_pos,pwm=PWM_rev,min.score=threshold)
         scores_ARF5_rev<- mapply(seq_pos,FUN=PWMscoreStartingAt,starting.at=sapply(FUN=start,match_ARF5_rev[]),SIMPLIFY=FALSE,MoreArgs=list(pwm=PWM_rev))
 
         sequence <- as.character(ARF5_pos[k])
@@ -83,7 +77,7 @@ while(k < length(seq_pos))
             for (elt2 in sites)
             {
                 j <- j+1  
-                if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
+                if ((elt2 - elt1) < 27 && (elt2 - elt1) >0)
                 {
                     DR <- rbind(DR,c((elt2 - elt1), sites[i],scores_ARF5[[k]][i],scores_ARF5[[k]][j],str_sub(sequence,sites[i] +3, sites[i] +3 + 6 + (elt2 - elt1) -1)))
                 }
@@ -103,7 +97,7 @@ while(k < length(seq_pos))
             for (elt2 in sites_rev)
             {
                 j <- j+1  
-                if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
+                if ((elt2 - elt1) < 27 && (elt2 - elt1) >0)
                 {
                     DR_rev <- rbind(DR_rev,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev[[k]][i],scores_ARF5_rev[[k]][j],str_sub(sequence,sites_rev[i] +3, sites_rev[i] +3 + 6 + (elt2 - elt1) -1)))
                 }
@@ -124,7 +118,7 @@ while(k < length(seq_pos))
             for (elt2 in sites_rev)
             {
                 j <- j+1  
-                if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
+                if ((elt2 - elt1) < 27 && (elt2 - elt1) >0)
                 {
                     ER <- rbind(ER,c((elt2 - elt1), sites[i],scores_ARF5[[k]][i],scores_ARF5_rev[[k]][j],str_sub(sequence,sites[i] +3, sites[i] +3 + 6 + (elt2 - elt1) -1)))
                 }
@@ -145,7 +139,7 @@ while(k < length(seq_pos))
             for (elt2 in sites)
             {
                 j <- j+1  
-                if ((elt2 - elt1) < 20 && (elt2 - elt1) >0)
+                if ((elt2 - elt1) < 27 && (elt2 - elt1) >0)
                 {
                     IR <- rbind(IR,c((elt2 - elt1), sites_rev[i],scores_ARF5_rev[[k]][i],scores_ARF5[[k]][j],str_sub(sequence,sites_rev[i] +3, sites_rev[i] +3 + 6 + (elt2 - elt1) -1)))
                 }
