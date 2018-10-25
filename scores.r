@@ -105,7 +105,7 @@ while(k < length(seq_pos))
         }
         if(!is.null(DR_rev))
         {
-            rownames(DR_rev) <- rep("DR rev",dim(DR_rev)[1])
+            rownames(DR_rev) <- rep("DR_rev",dim(DR_rev)[1])
             colnames(DR_rev) <- c("spacing","position","score1","score2","sequence")
         }
         
