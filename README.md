@@ -3,8 +3,8 @@ Le programme scores.r affiche chaque site de dimère dont chaque monomère a un 
 
 Pour exécuter le programme scores.r
 
-Rscript fichier.fasta
+Rscript scores.r fichier.fasta
 
 Si vous désirez avoir un sul fichier d'output :
 
-Rscript fichier.fasta nom_fichier
+Rscript scores.r fichier.fasta nom_fichier
